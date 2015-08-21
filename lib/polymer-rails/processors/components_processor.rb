@@ -13,7 +13,8 @@ module Polymer
 
       def require_imports
         @component.html_imports.each do |import|
-          @context.require_asset absolute_asset_path(import.attributes['href'].value)
+          asset_path = absolute_asset_path(import.attributes['href'].value)
+          @context.require_asset asset_path if asset_path.present?
           import.remove
         end
       end
